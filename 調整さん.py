@@ -6,7 +6,13 @@ from oauth2client.service_account import ServiceAccountCredentials
 # --- スプレッドシート設定 ---
 # 1. 接続設定
 scope = ['https://spreadsheets.google.com/feeds', 'https://www.googleapis.com/auth/drive']
-creds = ServiceAccountCredentials.from_json_keyfile_name('credentials.json', scope)
+#creds = ServiceAccountCredentials.from_json_keyfile_name('credentials.json', scope)
+# --- 修正後（こちらに書き換えてください） ---
+# 1. Secretsから鍵情報を取得
+gcp_info = st.secrets["gcp_service_account"]
+
+# 2. ファイル名ではなく、dict（辞書形式）として読み込む関数に変更
+creds = ServiceAccountCredentials.from_json_keyfile_dict(gcp_info, scope)
 client = gspread.authorize(creds)
 
 # --- スプレッドシート設定 ---
