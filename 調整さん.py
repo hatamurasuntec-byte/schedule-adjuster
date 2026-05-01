@@ -10,7 +10,7 @@ scope = ['https://spreadsheets.google.com/feeds', 'https://www.googleapis.com/au
 #creds = ServiceAccountCredentials.from_json_keyfile_name('credentials.json', scope)
 # --- 修正後（こちらに書き換えてください） ---
 # 1. Secretsから鍵情報を取得
-gcp_info = st.secrets["gcp_service_account"]
+gcp_info_raw = st.secrets["gcp_service_account"]
 gcp_info = json.loads(gcp_info_raw) # 文字列を辞書に変換
 # 2. ファイル名ではなく、dict（辞書形式）として読み込む関数に変更
 creds = ServiceAccountCredentials.from_json_keyfile_dict(gcp_info, scope)
